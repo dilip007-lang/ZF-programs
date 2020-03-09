@@ -1,5 +1,7 @@
-class printingChessBoard{
-	public static void main(String[] args){
+class printingChessBoard
+{
+	public static void main(String[] args)
+	{
 		int num = 1;
 		int noOfRows = 4;
 		int noOfColumns = 4;
@@ -9,21 +11,25 @@ class printingChessBoard{
 		{
 			for(int j=1;j<=noOfColumns;j++)
 			{
-				if(num==1){
+				if(num==1)
+				{
 					System.out.print(num+" ");
 					//System.out.print("1 ");
 					num = 0;
 				}
-				else{
+				else
+				{
 					System.out.print(num+" ");
 					//System.out.print("0 ");
 					num = 1;
 				}
 			}
-			if(num==1){
+			if(num==1)
+			{
 				num = 0;
 			}
-			else{
+			else
+			{
 				num=1;
 			}
 			System.out.println();	
