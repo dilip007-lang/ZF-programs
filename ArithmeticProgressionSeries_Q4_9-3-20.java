@@ -35,6 +35,23 @@ class ArithmeticProgressionSeries{
 				System.out.print(startingNumber+",");
 				
 			}
+			System.out.println();
+			*/
+			/*
+			for(int i=1;i<=noOfElements;i++)
+			{	
+				startingNumber+=difference;
+				if(i==1)
+				{
+					System.out.print(startingNumber);
+				}
+				else
+				{
+					System.out.print(","+startingNumber);
+				}
+				
+			}
+			System.out.println();
 			*/
 		}
 		else
