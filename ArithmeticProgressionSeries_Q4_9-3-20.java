@@ -28,15 +28,8 @@ class ArithmeticProgressionSeries{
 			}
 			System.out.println();
 
-			/*
-			for(int totalElements:noOfElements)
-			{
-				startingNumber+=difference;
-				System.out.print(startingNumber+",");
-				
-			}
-			System.out.println();
-			*/
+			
+			// type - 2
 			/*
 			for(int i=1;i<=noOfElements;i++)
 			{	
@@ -53,6 +46,19 @@ class ArithmeticProgressionSeries{
 			}
 			System.out.println();
 			*/
+			
+			// type - 3
+			/*String outputConcat = "";
+			for(int i=1;i<=noOfElements;i++)
+			{	
+				outputConcat+=startingNumber+",";
+				startingNumber+=difference;
+			}
+			System.out.println(outputConcat.substring(0,outputConcat.length()-1));*/
+			
+			//or
+			//String outputSubstring = outputConcat.substring(0,outputConcat.length()-1);
+			//System.out.println(outputSubstring);
 		}
 		else
 		{
