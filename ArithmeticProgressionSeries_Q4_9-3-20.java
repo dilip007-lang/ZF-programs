@@ -5,6 +5,7 @@ class ArithmeticProgressionSeries{
 		Scanner inputScanner = new Scanner(System.in);
 		int noOfElements;
 		int startingNumber;
+		int inputStartingNumber;
 		int difference;
 		System.out.println("The number of Elements should be greater than 0 and lesser than 10001,the Starting number should be greater than or equal to 0 and Difference must be greater than 0");
 		
@@ -12,8 +13,9 @@ class ArithmeticProgressionSeries{
 		noOfElements = inputScanner.nextInt();
 
 		System.out.println("Enter the Starting number :");
-		startingNumber = inputScanner.nextInt();
-
+		inputStartingNumber = inputScanner.nextInt();
+		startingNumber = inputStartingNumber;
+		
 		System.out.println("Enter the difference :");
 		difference = inputScanner.nextInt();
 
