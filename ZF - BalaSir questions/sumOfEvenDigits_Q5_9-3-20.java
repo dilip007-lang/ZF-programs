@@ -3,12 +3,14 @@ import java.util.Scanner;
 class sumOfEvenDigits{
 	public static void main(String[] args) {
 		Scanner inputScanner = new Scanner(System.in);
+		int userInput;
 		int inputNumber;
 		int sum = 0;
 		int digit;
 
 		System.out.println("Enter a number to get the sum of even digits in it:");
-		inputNumber = inputScanner.nextInt();
+		userInput = inputScanner.nextInt();
+		inputNumber = userInput;
 		if(inputNumber>0)
 		{
 			while(inputNumber>0)
