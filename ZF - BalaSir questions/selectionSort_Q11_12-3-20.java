@@ -29,6 +29,20 @@ class selectionSort{
 			}
 		}
 
+			/*
+		for each loop not needed for printing the sorted array:
+		for(int i=0;i<elementsArr.length;i++){
+			for(int j=i+1;j<elementsArr.length;j++){
+				if(elementsArr[j]<elementsArr[i] && i<elementsArr.length-1){
+					int temp = elementsArr[j];
+					elementsArr[j] = elementsArr[i];
+					elementsArr[i] = temp;
+				}
+			}
+			System.out.println(elementsArr[i]);
+		}*/
+		
+		
 		// printing the elements in the array in foreach loop
 		System.out.print("Sorted Array :");
 		for(int elements:elementsArr){
