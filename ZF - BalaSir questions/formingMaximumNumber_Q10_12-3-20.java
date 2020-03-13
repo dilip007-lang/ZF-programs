@@ -16,7 +16,6 @@ class formingMaximumNumber{
 			digitsArr.add(digit);
 		}
 		Collections.sort(digitsArr);
-		System.out.println(digitsArr);
 		for(int i=digitsArr.size()-1;i>=0;i--){
 			maximizedNumber = (maximizedNumber*10)+digitsArr.get(i);
 		}
@@ -65,8 +64,8 @@ class usingArray{
 
 
 		/*adding the digits from the array to a int variable */
-		for (int a=0;a<digitsArray.length;a++ ) {
-			maximizedNumber = (maximizedNumber*10)+digitsArray[a];
+		for(int elements:digitsArray){
+			maximizedNumber = (maximizedNumber*10)+elements;
 		}
 		System.out.println(maximizedNumber);
 	}	
