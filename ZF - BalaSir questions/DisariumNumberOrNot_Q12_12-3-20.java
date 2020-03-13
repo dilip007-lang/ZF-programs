@@ -1,6 +1,8 @@
 import java.util.Scanner;
-class DisariumNumberOrNot{
-	public static void main(String[] args) {
+class DisariumNumberOrNot
+{
+	public static void main(String[] args) 
+	{
 		Scanner inputScanner = new Scanner(System.in);
 
 		  //getting input from user
@@ -15,7 +17,8 @@ class DisariumNumberOrNot{
 		int sumOfTheDigits = 0;
 
 		  // this while is to calculate the no of digits
-		while(numberToBeChecked>0){
+		while(numberToBeChecked>0)
+		{
 			digitCount++;
 			numberToBeChecked/=10;
 		}
@@ -25,19 +28,20 @@ class DisariumNumberOrNot{
 
 	  	// this is to add the digit by powering it with its position
 	  	// we can given the digitsCount as loop condition
-		while(numberToBeChecked>0){
+		while(numberToBeChecked>0)
+		{
 			int digit =(int)numberToBeChecked%10;
 			sumOfTheDigits+=Math.pow(digit,digitCount);
 			numberToBeChecked/=10;
 			digitCount--;
 		}
 
-
-
-		if(sumOfTheDigits==userInput){
+		if(sumOfTheDigits==userInput)
+		{
 			System.out.println("The given number is a DISARIUM : "+sumOfTheDigits);
 		}
-		else{
+		else
+		{
 			System.out.println("The given number is NOT a DISARIUM : "+sumOfTheDigits);
 		}
 	}
