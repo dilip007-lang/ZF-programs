@@ -7,7 +7,6 @@ class AutomorphicNumber{
 		long userInput = inputScanner.nextInt();
 		long numberToBeChecked = userInput;
 		long squaredNumber = (long)Math.pow(numberToBeChecked,2);
-		long tempSquaredNumber = squaredNumber;
 		long endingNumber = 0;
 		long modulo = 1;
 		if(squaredNumber==0)
@@ -18,18 +17,18 @@ class AutomorphicNumber{
 		{
 			while(numberToBeChecked>0)
 			{
-				endingNumber += (tempSquaredNumber%10)*modulo;
+				endingNumber += (squaredNumber%10)*modulo;
 				modulo*=10;
 				numberToBeChecked/=10;
-				tempSquaredNumber/=10;
+				squaredNumber/=10;
 			}
 			if(endingNumber==userInput)
 			{
-				System.out.println("It's a AUTOMORPHIC NUMBER your input :"+userInput+" It's square :"+squaredNumber);
+				System.out.println("It's a AUTOMORPHIC NUMBER your input :"+userInput+");
 			}	
 			else
 			{
-				System.out.println("It's NOT an AUTOMORPHIC NUMBER number your input :"+userInput+" It's square :"+squaredNumber);
+				System.out.println("It's NOT an AUTOMORPHIC NUMBER number your input :"+userInput+");
 			}	
 		}	
 	}
