@@ -17,6 +17,7 @@ class DisariumNumberOrNot
 		int sumOfTheDigits = 0;
 
 		  // this while is to calculate the no of digits
+		// without converting the value to String to get the length
 		while(numberToBeChecked>0)
 		{
 			digitCount++;
