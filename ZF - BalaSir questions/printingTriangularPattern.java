@@ -38,11 +38,11 @@ class triangularPattern
 		
 		/*
 		only two variables needed
-		for(int i=startingNum;i<=rowAndColumn+startingNum;i++){
-			for(int j=startingNum;j<i;j++){
+		for(int i=userStartingNum;i<=rowAndColumn+userStartingNum;i++){
+			for(int j=userStartingNum;j<i;j++){
 				System.out.print(j+" ");
 			}
-			for(int k=i;k>=startingNum;k--){
+			for(int k=i;k>=userStartingNum;k--){
 				System.out.print(k+" ");
 			}
 			System.out.println();
