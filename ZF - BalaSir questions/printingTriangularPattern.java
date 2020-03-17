@@ -38,3 +38,18 @@ class triangularPattern
 		}
 	}
 }
+
+/*
+	for static patern
+	int num = 7;
+	for(int i=1;i<=7;i++){
+		for(int j=1;j<i;j++){
+			Syste.out.print(j+" ");
+		}
+		for(int k=i;k>=1;k++){
+			Syste.out.print(k+" ");
+		}
+		System.out.println();
+	}	
+	
+*/
