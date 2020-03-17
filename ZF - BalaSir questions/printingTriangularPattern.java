@@ -6,50 +6,20 @@ class triangularPattern
 		Scanner inputScanner  = new Scanner(System.in);
 		System.out.print("Enter the Starting number of the triangle pattern :");
 		int userStartingNum = inputScanner.nextInt();
+		// temp variable is not needed because I'am not destroying the input
 		System.out.print("Enter no of rows for that triangle :");
 		int userRowAndColumn = inputScanner.nextInt();
-		int startingNum = userStartingNum;
-		int tempStartingNum = startingNum-1;
-		int numberIterator = tempStartingNum;
-		int rowAndColumn = userRowAndColumn;
-		int columnIterator = 1;
-		Boolean flag = true;
-
-		for(int i=1;i<=rowAndColumn;i++)
+		for(int i=startingNum;i<=rowAndColumn+startingNum;i++)
 		{
-			for (int j=1;j<=columnIterator;j++)
+			for(int j=startingNum;j<i;j++)
 			{
-				if(numberIterator<startingNum && flag)
-				{
-					numberIterator++;
-				}
-				else
-				{
-					flag = false;
-					numberIterator--;
-				}
-				System.out.print(numberIterator+" ");
+				System.out.print(j+" ");
 			}
-			flag = true;
-			startingNum++;
-			numberIterator = tempStartingNum;
+			for(int k=i;k>=startingNum;k--)
+			{
+				System.out.print(k+" ");
+			}
 			System.out.println();
-			columnIterator+=2;
 		}
 	}
 }
-
-/*
-	for static patern
-	int num = 7;
-	for(int i=1;i<=7;i++){
-		for(int j=1;j<i;j++){
-			System.out.print(j+" ");
-		}
-		for(int k=i;k>=1;k++){
-			System.out.print(k+" ");
-		}
-		System.out.println();
-	}	
-	
-*/
