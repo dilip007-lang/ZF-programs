@@ -18,6 +18,7 @@ class DisariumNumberOrNot
 
 		  // this while will calculate the no of digits
 		// without converting the value to String to get the length = Integer.toString(numberToBeChecked);
+		// to avoid this while loop we can use the methos Math.log10() - it's return type i double
 		while(numberToBeChecked>0)
 		{
 			digitCount++;
