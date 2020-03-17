@@ -20,17 +20,19 @@ class selectionSort{
 		// storing userinput in an another array and sorting the array
 		int[] elementsArr = userElement;
 		for(int i=0;i<elementsArr.length-1;i++){
+			int position = i;
 			for(int j=i+1;j<elementsArr.length;j++){
 				if(elementsArr[j]<elementsArr[i]){
-					int temp = elementsArr[j];
-					elementsArr[j] = elementsArr[i];
-					elementsArr[i] = temp;
+					position = j;
 				}
 			}
+			int temp = elementsArr[position];
+			elementsArr[position] = elementsArr[i];
+			elementsArr[i] = temp;
 		}
-
-			/*
-			System.out.print(Arrays.toString(elementsArr));
+		
+		System.out.print(Arrays.toString(elementsArr));
+		/*
 		for each loop not needed for printing the sorted array:
 		for(int i=0;i<elementsArr.length;i++){
 			for(int j=i+1;j<elementsArr.length;j++){
@@ -40,8 +42,8 @@ class selectionSort{
 					elementsArr[i] = temp;
 				}
 			}
-			System.out.println(elementsArr[i]);
-		}*/
+			//System.out.println(elementsArr[i]);
+		}
 		
 		
 		// printing the elements in the array in foreach loop
@@ -49,6 +51,6 @@ class selectionSort{
 		for(int elements:elementsArr){
 			System.out.print(elements+" ");
 		}
-		System.out.println();
+		System.out.println();*?
 	}
 }
