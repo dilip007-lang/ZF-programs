@@ -35,17 +35,14 @@ class triangularPattern
 			columnIterator+=2;
 		}
 		
-		
-		/*
-		only two variables needed
-		for(int i=userStartingNum;i<=rowAndColumn+userStartingNum;i++){
-			for(int j=userStartingNum;j<i;j++){
-				System.out.print(j+" ");
+		for(int outerLoop=userStartingNum;outerLoop<(userRowAndColumn+userStartingNum);outerLoop++){
+			for(int inner1=userStartingNum;inner1<outerLoop;inner1++){
+				System.out.print(inner1+" ");
 			}
-			for(int k=i;k>=userStartingNum;k--){
-				System.out.print(k+" ");
+			for(int inner2=outerLoop;inner2>=userStartingNum;inner2--){
+				System.out.print(inner2+" ");
 			}
 			System.out.println();
-		}*/
+		}
 	}
 }
