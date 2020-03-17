@@ -30,7 +30,7 @@ class triangularPattern
 			}
 			flag = true;
 			startingNum++;
-			numberIterator =  startingNum-1;;
+			numberIterator =userStartingNum-1;
 			System.out.println();
 			columnIterator+=2;
 		}
