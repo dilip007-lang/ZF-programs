@@ -8,27 +8,23 @@ class removingWordFromString{
 
 		System.out.print("Enter the word to be removed from the sentence :");
 		String userInputRemoveWord = inputScanner.nextLine();
-
-		String sentence = userInputSentence;
-		String wordToBeRemoved = userInputRemoveWord;
 		
-		String replacedSentence = sentence.replace(wordToBeRemoved,"");
+		String replacedSentence = userInputSentence.replace(wordToBeRemoved,"");
 		System.out.println("Using replace method :"+replacedSentence);
-
 		
 		/*without replace() method*/
 			String crtSentence = "";
-			int removeWordLength = wordToBeRemoved.length();
-			int sentenceLength = sentence.length();
+			int removeWordLength = userInputRemoveWord.length();
+			int sentenceLength = userInputSentence.length();
 			for(int i=0;i<sentenceLength;i++)
 			{
-				if((i+removeWordLength<=sentenceLength) && sentence.substring(i,i+removeWordLength).equals(wordToBeRemoved))
+				if((i+removeWordLength<=sentenceLength) && userInputSentence.substring(i,i+removeWordLength).equals(userInputRemoveWord))
 				{
 					i = i+removeWordLength-1;
 				}
 				else
 				{
-					crtSentence+=sentence.substring(i,i+1);
+					crtSentence+=userInputSentence.substring(i,i+1);
 				}
 			}	
 			System.out.println("Removed sentence without using replace method :"+crtSentence);
