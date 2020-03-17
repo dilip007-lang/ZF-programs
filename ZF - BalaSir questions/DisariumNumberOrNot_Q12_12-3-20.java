@@ -16,8 +16,8 @@ class DisariumNumberOrNot
 	  	//the add the digits powered number
 		int sumOfTheDigits = 0;
 
-		  // this while is to calculate the no of digits
-		// without converting the value to String to get the length
+		  // this while will calculate the no of digits
+		// without converting the value to String to get the length = Integer.toString(numberToBeChecked);
 		while(numberToBeChecked>0)
 		{
 			digitCount++;
