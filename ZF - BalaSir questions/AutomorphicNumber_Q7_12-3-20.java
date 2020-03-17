@@ -19,7 +19,7 @@ class AutomorphicNumber{
 			{
 				endingNumber += (squaredNumber%10)*modulo;
 				modulo*=10;
-				numberToBeChecked/=10;
+				numberToBeChecked/=10; 
 				squaredNumber/=10;
 			}
 			if(endingNumber==userInput)
