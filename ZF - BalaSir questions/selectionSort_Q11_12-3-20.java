@@ -30,6 +30,7 @@ class selectionSort{
 		}
 
 			/*
+			System.out.print(Arrays.toString(elementsArr));
 		for each loop not needed for printing the sorted array:
 		for(int i=0;i<elementsArr.length;i++){
 			for(int j=i+1;j<elementsArr.length;j++){
