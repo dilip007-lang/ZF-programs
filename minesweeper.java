@@ -9,6 +9,8 @@ class minesweeperGame{
 	static Scanner inputScanner = new Scanner(System.in);
 	static int userFlagCount = noOfBombs;
 	static int noOfCrtFlags;
+	// this method is the choose the level of the game.
+	// there are three levels Easy,Medium,Hard
 	static void gameLevel(){
 		System.out.println("Enter Game Level (Easy,Medium,Hard) :");
 		String gameLevel = inputScanner.next();
@@ -22,9 +24,13 @@ class minesweeperGame{
 			noOfColumns += 8;
 			noOfBombs += 8;
 		}
+		// assigning the size of the array
 		minesArray = new int[noOfRows][noOfColumns];
+		//this array is to store the value which user open or flaged a square the value will be taken from the corresponding position in minesArray and assigned here
 		storingUserInput = new String[noOfRows][noOfColumns];
 	}
+	
+	// this method is to place numbers and bombs the first loop will place the bombs and seconf outer loop will place the numbers according to the number of bombs around it
 	static void placingNumbersAndBombs(){
 		System.out.println("length"+minesArray.length);
 		Random randomNumber = new Random();
@@ -71,6 +77,7 @@ class minesweeperGame{
 			}
 		}
 	}
+	// this method is to check the condition for opening a square	
 	static String checkingSquareOpeningCondition(int row,int column){
 		String returnValue = "";
 		if(minesArray[row][column] == -1){
@@ -81,7 +88,6 @@ class minesweeperGame{
 				for(int j=0;j<noOfColumns;j++){
 					if(minesArray[i][j] == 0){
 						storingUserInput[i][j] = Integer.toString(minesArray[i][j]);
-
 					}
 				}
 			}
@@ -93,6 +99,8 @@ class minesweeperGame{
 		System.out.println(storingUserInput[row][column]);
 		return returnValue;
 	}
+	
+	// this method is to check the condition to flag a square
 	static String checkingSquareFlagCondition(int row,int column){
 		String returnValue = "";
 		System.out.println(minesArray[row][column]);
@@ -118,6 +126,8 @@ class minesweeperGame{
 		}
 		return returnValue;
 	}
+	
+	// this is the method which invokes the above two method to get input and check the input and render result
 	static boolean checkingInputValues(int row,int column,String squareType){
 		String openedSquare = "";
 		String flaggedSquare = "";
@@ -153,6 +163,7 @@ class minesweeperGame{
 		}
 		return returnValue;
 	}
+	
 	static void gettingInputAndShowingResult(){
 		int noOfFlags = noOfBombs;
 		for(int i=0;i<noOfRows;i++){
@@ -180,9 +191,11 @@ class minesweeperGame{
 			}
 		}
 	}
+	
 	public static void main(String[] args) {
 		gameLevel();	
 		placingNumbersAndBombs();
+		// just for checking
 		for(int[] innerArray : minesArray){
 			for(int values : innerArray){
 				System.out.print(values+"\t");	
