@@ -132,7 +132,7 @@ class minesweeperGame{
 			}
 			else{
 				storingUserInput[row][column] = Integer.toString(minesArray[row][column]);
-				winningCondition();
+				returnValue = winningCondition();
 			}
 		}
 		return returnValue;
@@ -202,16 +202,20 @@ class minesweeperGame{
 		return returnValue;
 	}
 
-	static void gettingInputAndShowingResult(){
-		boolean startGame = true;
-		while(startGame){
-			System.out.println("Flag remaining :"+userFlagCount+"\n");
+	static void displayTable(){
+		System.out.println("Flag remaining :"+userFlagCount+"\n");
 			for(String[] innerArray:storingUserInput){
 				for(String arrValues:innerArray){
 					System.out.print(arrValues+"\t");
 				}
 				System.out.println();
 			}
+	}
+
+	static void gettingInputAndShowingResult(){
+		boolean startGame = true;
+		while(startGame){
+			displayTable();
 			System.out.println("Enter the Row of the square (It should be between 0 to "+noOfRows+")");
 			int inputRow = inputScanner.nextInt();
 			System.out.println("Enter the Column of the square (It should be between 0 to "+noOfColumns+")");
@@ -223,6 +227,7 @@ class minesweeperGame{
 			}
 		}
 	}
+
 	public static void main(String[] args) {
 		gameLevel();	
 		placingNumbersAndBombs();
