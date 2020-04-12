@@ -1,9 +1,9 @@
 import java.util.Random;
 import java.util.Scanner;
 class minesweeperGame{
-	static int noOfRows = 8;
-	static int noOfColumns = 8;
-	static int noOfBombs = 8;
+	static int noOfRows;
+	static int noOfColumns;
+	static int noOfBombs;
 	static int[][] minesArray;
 	static String[][] storingUserInput;
 	static Scanner inputScanner = new Scanner(System.in);
@@ -14,16 +14,22 @@ class minesweeperGame{
 	static void gameLevel(){
 		System.out.println("Enter Game Level (Easy,Medium,Hard) :");
 		String gameLevel = inputScanner.next();
-		if(gameLevel.equalsIgnoreCase("Medium")){
-			noOfRows += 4;
-			noOfColumns += 4;
-			noOfBombs += 4;
-		}
-		else if(gameLevel.equalsIgnoreCase("Hard")){
-			noOfRows += 8;
-			noOfColumns += 8;
-			noOfBombs += 8;
-		}
+			switch (gameLevel) {
+				case "Easy":
+					noOfRows = 8;
+					noOfColumns = 8;
+					noOfBombs = 8;
+					break;
+				case "Medium":
+					noOfRows = 12;
+					noOfColumns = 12;
+					noOfBombs = 12;
+					break;
+				case "Hard":
+					noOfRows = 16;
+					noOfColumns = 16;
+					noOfBombs = 16;
+			}
 		minesArray = new int[noOfRows][noOfColumns];
 		storingUserInput = new String[noOfRows][noOfColumns];
 		for(int i=0;i<noOfRows;i++){
@@ -35,6 +41,10 @@ class minesweeperGame{
 	}
 
 	static void conditionsForPlacingNumbers(int row,int column){
+		int rowStarting = row-1;
+		int rowEnding = row+1;
+		int columnStarting = column-1;
+		int columnEnding = column+1;
 		if((column-1>=0) && minesArray[row][column-1]!=-1){
 			minesArray[row][column-1]+=1;	
 		}
@@ -58,15 +68,17 @@ class minesweeperGame{
 		}
 		if((row+1<noOfRows) && (column+1<noOfColumns) && minesArray[row+1][column+1]!=-1){
 			minesArray[row+1][column+1]+=1;	
-		}		
+		}
+
 	}
+
 	static void placingNumbersAndBombs(){
 		Random randomNumber = new Random();
 		for(int i=0;i<noOfBombs;i++){
 			int rowRanNum = randomNumber.nextInt(noOfRows);
 			int columnRanNum = randomNumber.nextInt(noOfColumns);
 			if(minesArray[rowRanNum][columnRanNum]!=-1){
-				minesArray[rowRanNum][columnRanNum] = -1;	
+				minesArray[rowRanNum][columnRanNum] = -1;
 			}
 			else{
 				if(rowRanNum<noOfRows-1 && minesArray[rowRanNum+1][columnRanNum]!=-1){
@@ -185,27 +197,28 @@ class minesweeperGame{
 			if(storingUserInput[row][column] == "*"){
 				if(squareType.equalsIgnoreCase("O")){
 					openedSquare = checkingSquareOpeningCondition(row,column);
-					if(openedSquare.equals("Loss")){
-						System.out.println("You Loss the game ....");
-						returnValue = true;
-					}
-					else if(openedSquare.equals("Won")){
-						System.out.println("You Won the game ....");
-						returnValue = true;
+					switch(openedSquare){
+						case "Loss":
+							System.out.println("You Loss the game ....");
+							returnValue = true;
+							break;
+						case "Won":
+							System.out.println("You Won the game ....");
+							returnValue = true;	
 					}
 				}
 				else{
 				 	flaggedSquare = checkingSquareFlagCondition(row,column);
-				 	//if(userFlagCount==0){
-					 	if(flaggedSquare.equals("Won")){
-					 		System.out.println("You Won the Game .....");
-					 		returnValue = true;
-					 	}
-					 	else if(flaggedSquare.equals("Loss")){
-					 		System.out.println("You Loss the Game .... ");
-					 		returnValue = true;
-					 	}
-					//}	
+				 	switch(flaggedSquare){
+						case "Loss":
+							System.out.println("You Loss the game ....");
+							returnValue = true;
+							break;
+						case "Won":
+							System.out.println("You Won the game ....");
+							returnValue = true;	
+					}
+					 	
 				}
 			}
 			else if(squareType.equalsIgnoreCase("UF")){
