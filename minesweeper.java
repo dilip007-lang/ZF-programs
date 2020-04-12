@@ -1,9 +1,9 @@
 import java.util.Random;
 import java.util.Scanner;
 class minesweeperGame{
-	static int noOfRows = 4;
-	static int noOfColumns = 4;
-	static int noOfBombs = 4;
+	static int noOfRows = 8;
+	static int noOfColumns = 8;
+	static int noOfBombs = 8;
 	static int[][] minesArray;
 	static String[][] storingUserInput;
 	static Scanner inputScanner = new Scanner(System.in);
