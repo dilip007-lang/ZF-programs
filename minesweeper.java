@@ -90,6 +90,17 @@ class minesweeperGame{
 		}	
 	}
 
+	static String winningCondition(){
+		String result = "";
+		if(userFlagCount==0 && noOfCrtFlags==noOfBombs){
+			result = "Won";
+		}
+		else if(userFlagCount==0 && noOfCrtFlags<noOfBombs){
+			result = "Loss";
+		}	
+		return result;
+	}
+
 	static String checkingSquareOpeningCondition(int row,int column){
 		String returnValue = "";
 		squaresToBeOpened--;
@@ -114,20 +125,15 @@ class minesweeperGame{
 			}
 		}
 
-		else if(squaresToBeOpened==0){
+		else{
 			if(minesArray[row][column] == -1){
 				storingUserInput[row][column] = "-1";
 				returnValue =  "Loss";
 			}
 			else{
 				storingUserInput[row][column] = Integer.toString(minesArray[row][column]);
+				winningCondition();
 			}
-			if(userFlagCount==0 && noOfCrtFlags==noOfBombs){
-				returnValue = "Won";
-			}
-			else if(userFlagCount==0 && noOfCrtFlags<noOfBombs){
-				returnValue = "Loss";
-			}	
 		}
 		return returnValue;
 	}
@@ -146,11 +152,8 @@ class minesweeperGame{
 			if(minesArray[row][column] == -1){
 				noOfCrtFlags++;	
 			}
-			if(squaresToBeOpened==0 && noOfCrtFlags==noOfBombs){
-				returnValue = "Won";
-			}
-			else if(squaresToBeOpened==0 && noOfCrtFlags<noOfBombs){
-				returnValue = "Loss";
+			if(squaresToBeOpened == 0){
+				returnValue = winningCondition();
 			}
 		}
 		else{
