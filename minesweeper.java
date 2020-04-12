@@ -162,11 +162,26 @@ class minesweeperGame{
 		return returnValue;
 	}
 
+	static void unflaggingSquare(int row,int column){
+		if(storingUserInput[row][column].equalsIgnoreCase("F")){
+			storingUserInput[row][column] = "*";
+			userFlagCount++;
+			if(minesArray[row][column] == -1){
+				noOfCrtFlags--;
+			}
+			System.out.println("The given square is unflagged");
+		}
+		else{
+			System.out.println("The given square is not a flagged square");
+		}
+	}
+
 	static boolean checkingInputValues(int row,int column,String squareType){
 		String openedSquare = "";
 		String flaggedSquare = "";
+		String unflaggedSquare = "";
 		boolean returnValue = false;
-		if(row>=0 && row<noOfRows && column>=0 && column<noOfColumns && (squareType.equalsIgnoreCase("F") || squareType.equalsIgnoreCase("O"))){
+		if(row>=0 && row<noOfRows && column>=0 && column<noOfColumns && (squareType.equalsIgnoreCase("F") || squareType.equalsIgnoreCase("O") || squareType.equalsIgnoreCase("UF"))){
 			if(storingUserInput[row][column] == "*"){
 				if(squareType.equalsIgnoreCase("O")){
 					openedSquare = checkingSquareOpeningCondition(row,column);
@@ -181,15 +196,20 @@ class minesweeperGame{
 				}
 				else{
 				 	flaggedSquare = checkingSquareFlagCondition(row,column);
-				 	if(flaggedSquare.equals("Won")){
-				 		System.out.println("You Won the Game .....");
-				 		returnValue = true;
-				 	}
-				 	else if(flaggedSquare.equals("Loss")){
-				 		System.out.println("You Loss the Game .... ");
-				 		returnValue = true;
-				 	}
+				 	//if(userFlagCount==0){
+					 	if(flaggedSquare.equals("Won")){
+					 		System.out.println("You Won the Game .....");
+					 		returnValue = true;
+					 	}
+					 	else if(flaggedSquare.equals("Loss")){
+					 		System.out.println("You Loss the Game .... ");
+					 		returnValue = true;
+					 	}
+					//}	
 				}
+			}
+			else if(squareType.equalsIgnoreCase("UF")){
+				unflaggingSquare(row,column);
 			}
 			else{
 				System.out.println("The square is already active");
@@ -220,7 +240,7 @@ class minesweeperGame{
 			int inputRow = inputScanner.nextInt();
 			System.out.println("Enter the Column of the square (It should be between 0 to "+noOfColumns+")");
 			int inputColumn = inputScanner.nextInt();
-			System.out.println("Do you want OPEN or FLAG the square ('F' for Flag and 'O' for Open ) :");
+			System.out.println("Do you want OPEN, FLAG or UNFLAG the square ('F' for Flag , 'O' for Open and 'UF' for unflag the square) :");
 			String inputSquareType = inputScanner.next();
 			if(checkingInputValues(inputRow,inputColumn,inputSquareType)){
 				startGame = false;
