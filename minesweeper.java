@@ -15,16 +15,21 @@ class minesweeperGame{
 		System.out.println("Enter Game Level (Easy,Medium,Hard) :");
 		String gameLevel = inputScanner.next();
 			switch (gameLevel) {
+				case "easy":
 				case "Easy":
 					noOfRows = 8;
 					noOfColumns = 8;
 					noOfBombs = 8;
 					break;
+
+				case "medium":
 				case "Medium":
 					noOfRows = 12;
 					noOfColumns = 12;
 					noOfBombs = 12;
 					break;
+
+				case "hard":
 				case "Hard":
 					noOfRows = 16;
 					noOfColumns = 16;
@@ -40,36 +45,103 @@ class minesweeperGame{
 		}
 	}
 
-	static void conditionsForPlacingNumbers(int row,int column){
+	static void conditionsForPlacingNumbersAndBombs(int row,int column,int value){
+		/*
+		int rowStarting = 0;
+		int rowEnding = 0;
+		int columnStarting = 0;
+		int columnEnding = 0;
+
+		switch(row){
+			case 0:
+				rowStarting = row;
+				rowEnding = row+1;
+				break;
+			case 7:
+			case 11:
+			case 15:
+				rowEnding = row;
+				rowStarting = row-1;
+				break;
+			default:
+				rowStarting = row-1;
+				rowEnding = row+1;	
+		}
+
+		switch(column){
+			case 0:
+				columnStarting = column;
+				columnEnding = column+1;
+				break;
+			case 7:
+			case 11:
+			case 15:
+				columnEnding = column;	
+				columnStarting = column-1;
+			default:
+				columnStarting = column-1;
+				columnEnding = column+1;	
+		}
+		*/
+
 		int rowStarting = row-1;
 		int rowEnding = row+1;
 		int columnStarting = column-1;
 		int columnEnding = column+1;
-		if((column-1>=0) && minesArray[row][column-1]!=-1){
-			minesArray[row][column-1]+=1;	
-		}
-		if((column+1<noOfColumns) && minesArray[row][column+1]!=-1){
-			minesArray[row][column+1]+=1;	
-		}
-		if((row-1>=0) && (column-1>=0) && minesArray[row-1][column-1]!=-1){
-			minesArray[row-1][column-1]+=1;	
-		}
-		if((row-1>=0) && minesArray[row-1][column]!=-1){
-			minesArray[row-1][column]+=1;	
-		}
-		if((row-1>=0) && (column+1<noOfColumns) && minesArray[row-1][column+1]!=-1){
-			minesArray[row-1][column+1]+=1;	
-		}
-		if((row+1<noOfRows) && (column-1>=0) && minesArray[row+1][column-1]!=-1){
-			minesArray[row+1][column-1]+=1;	
-		}
-		if((row+1<noOfRows) && minesArray[row+1][column]!=-1){
-			minesArray[row+1][column]+=1;	
-		}
-		if((row+1<noOfRows) && (column+1<noOfColumns) && minesArray[row+1][column+1]!=-1){
-			minesArray[row+1][column+1]+=1;	
+
+		switch(row){
+			case 0:
+				rowStarting = row;
+				break;
+			case 7:
+			case 11:
+			case 15:
+				rowEnding = row;
 		}
 
+		switch(column){
+			case 0:
+				columnStarting = column;
+				break;
+			case 7:
+			case 11:
+			case 15:
+				columnEnding = column;	
+		}
+
+		switch(value){
+			case 1:
+				for(int i=rowStarting;i<=rowEnding;i++){
+					for(int j=columnStarting;j<=columnEnding;j++){
+						if(minesArray[i][j]!=-1){
+							minesArray[i][j]+=1;
+						} 
+					}
+				}
+				break;
+
+			case -1:
+				for(int i=rowStarting;i<=rowEnding;i++){
+					for(int j=columnStarting;j<=columnEnding;j++){
+						if(minesArray[i][j]!=-1){
+							minesArray[i][j] = -1;
+							conditionsForPlacingNumbersAndBombs(i,j,1);
+							break;
+						}
+					}
+				}
+				break;
+
+			case 0:
+				for(int i=rowStarting;i<=rowEnding;i++){
+					for(int j=columnStarting;j<=columnEnding;j++){
+						if(minesArray[i][j] == 0){
+							storingUserInput[i][j] = Integer.toString(minesArray[i][j]);
+							squaresToBeOpened--;
+						}
+					}
+				}			
+		}
 	}
 
 	static void placingNumbersAndBombs(){
@@ -79,26 +151,11 @@ class minesweeperGame{
 			int columnRanNum = randomNumber.nextInt(noOfColumns);
 			if(minesArray[rowRanNum][columnRanNum]!=-1){
 				minesArray[rowRanNum][columnRanNum] = -1;
+				conditionsForPlacingNumbersAndBombs(rowRanNum,columnRanNum,1);
 			}
 			else{
-				if(rowRanNum<noOfRows-1 && minesArray[rowRanNum+1][columnRanNum]!=-1){
-					minesArray[rowRanNum+1][columnRanNum] = -1;
-					rowRanNum+=1;
-				}
-				else if(columnRanNum<noOfColumns-1 && minesArray[rowRanNum][columnRanNum+1]!=-1){
-					minesArray[rowRanNum][columnRanNum+1] = -1;
-					columnRanNum+=1;
-				}
-				else if(columnRanNum>0 && minesArray[rowRanNum][columnRanNum-1]!=-1){
-					minesArray[rowRanNum][columnRanNum-1] = -1;
-					columnRanNum-=1;
-				}
-				else if(rowRanNum>0 && minesArray[rowRanNum-1][columnRanNum]!=-1){
-					minesArray[rowRanNum-1][columnRanNum] = -1;
-					rowRanNum-=1;
-				}
-			}
-			conditionsForPlacingNumbers(rowRanNum,columnRanNum);						
+				conditionsForPlacingNumbersAndBombs(rowRanNum,columnRanNum,-1);
+			}					
 		}	
 	}
 
@@ -117,26 +174,21 @@ class minesweeperGame{
 		String returnValue = "";
 		squaresToBeOpened--;
 		if(squaresToBeOpened!=0){
-			if(minesArray[row][column] == -1){
-			storingUserInput[row][column] = "-1";
-			returnValue =  "Loss";
-			}
-			else if(minesArray[row][column] == 0){
-				squaresToBeOpened++;
-				for(int i=0;i<noOfRows;i++){
-					for(int j=0;j<noOfColumns;j++){
-						if(minesArray[i][j] == 0){
-							storingUserInput[i][j] = Integer.toString(minesArray[i][j]);
-							squaresToBeOpened--;
-						}
-					}
-				}
-			}
-			else{
-				storingUserInput[row][column] = Integer.toString(minesArray[row][column]);
+			switch(minesArray[row][column]){
+				case -1:
+					storingUserInput[row][column] = "-1";
+					returnValue =  "Loss";
+					break;
+
+				case 0:
+					squaresToBeOpened++;
+					conditionsForPlacingNumbersAndBombs(row,column,0);
+					break;
+
+				default:
+					storingUserInput[row][column] = Integer.toString(minesArray[row][column]);		
 			}
 		}
-
 		else{
 			if(minesArray[row][column] == -1){
 				storingUserInput[row][column] = "-1";
@@ -153,6 +205,12 @@ class minesweeperGame{
 	static String checkingSquareFlagCondition(int row,int column){
 		String returnValue = "";
 		userFlagCount--;		
+		switch(storingUserInput[row][column]){
+			case "*":
+
+		}
+
+
 		if(userFlagCount>0){
 			storingUserInput[row][column] = "F";
 			if(minesArray[row][column] == -1){
@@ -174,7 +232,7 @@ class minesweeperGame{
 		return returnValue;
 	}
 
-	static void unflaggingSquare(int row,int column){
+	/*static void unflaggingSquare(int row,int column){
 		if(storingUserInput[row][column].equalsIgnoreCase("F")){
 			storingUserInput[row][column] = "*";
 			userFlagCount++;
@@ -186,52 +244,48 @@ class minesweeperGame{
 		else{
 			System.out.println("The given square is not a flagged square");
 		}
-	}
+	}*/
 
 	static boolean checkingInputValues(int row,int column,String squareType){
 		String openedSquare = "";
 		String flaggedSquare = "";
 		String unflaggedSquare = "";
 		boolean returnValue = false;
-		if(row>=0 && row<noOfRows && column>=0 && column<noOfColumns && (squareType.equalsIgnoreCase("F") || squareType.equalsIgnoreCase("O") || squareType.equalsIgnoreCase("UF"))){
-			if(storingUserInput[row][column] == "*"){
-				if(squareType.equalsIgnoreCase("O")){
+		if(row>=0 && row<noOfRows && column>=0 && column<noOfColumns){
+			switch(squareType){
+				case "O":
+				case "o":
 					openedSquare = checkingSquareOpeningCondition(row,column);
 					switch(openedSquare){
 						case "Loss":
 							System.out.println("You Loss the game ....");
 							returnValue = true;
 							break;
+
 						case "Won":
 							System.out.println("You Won the game ....");
 							returnValue = true;	
 					}
-				}
-				else{
+				case "F":
+				case "f":
 				 	flaggedSquare = checkingSquareFlagCondition(row,column);
 				 	switch(flaggedSquare){
 						case "Loss":
 							System.out.println("You Loss the game ....");
 							returnValue = true;
 							break;
+
 						case "Won":
 							System.out.println("You Won the game ....");
 							returnValue = true;	
-					}
-					 	
-				}
-			}
-			else if(squareType.equalsIgnoreCase("UF")){
-				unflaggingSquare(row,column);
-			}
-			else{
-				System.out.println("The square is already active");
+					}	
+				default:
+					System.out.println("Please enter wheather you want to open or flag the square (if you want to unflag a flagged square pls choose flag itself)");	 	
 			}
 		}
 		else{
-			System.out.println("Please enter correct value some of your inputs are not satisfying our constraints ...");
-			returnValue = false;
-		}
+			System.out.println("The given square is not exists ...");
+		}		
 		return returnValue;
 	}
 
