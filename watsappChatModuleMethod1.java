@@ -69,35 +69,39 @@ class chatModule{
 	static ArrayList<contact> contactList = new ArrayList<>();
 	static ArrayList<chat> chatList = new ArrayList<>();
 	static int id = 1;
-
+	boolean flag = true;
 	static void gettingURL(){
-		System.out.println("Enter the URL :");
-		String URL = inputScanner.nextLine();
-		String[] splitingURL = URL.split(" /");
-		if(splitingURL.length>=2){
-			switch(splitingURL[1]){
-				case "contacts":
-					contacts(splitingURL);
-					break;
-				case "chats":
-					chats(splitingURL);
-					break;
-				default:
-					System.out.println("The Entered Resource is not found .....");		
+		do{
+			System.out.println("Enter the URL :");
+			String URL = inputScanner.nextLine();
+			String[] splitingURL = URL.split(" /");
+			if(splitingURL.length>=2){
+				switch(splitingURL[1]){
+					case "contacts":
+						contacts(splitingURL);
+						break;
+					case "chats":
+						chats(splitingURL);
+						break;
+					default:
+						System.out.println("The Entered Resource is not found .....");		
+				}
+			}	
+			else{
+				System.out.println("The URL is incorrect ..... try again");
 			}
-		}	
-		else{
-			System.out.println("The URL is incorrect ..... try again");
-		}
 
-		System.out.println("Do you want to continue ....(y/n)");
-		String searchAgain = inputScanner.nextLine();
-		if(searchAgain.equalsIgnoreCase("Y")){
-			gettingURL();
+			System.out.println("Do you want to continue ....(y/n)");
+			String searchAgain = inputScanner.nextLine();
+			if(searchAgain.equalsIgnoreCase("Y")){
+				flag = true;
+			}
+			else{
+				flag = false;
+				System.exit(1);
+			}
 		}
-		else{
-			System.exit(1);
-		}
+		while(flag);
 	}
 
 	static void contacts(String[] splittedURL){
