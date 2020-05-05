@@ -185,15 +185,6 @@ class chatsModule{
 		catch(Exception e){
 			System.out.println("Contact not found .....");
 		}
-
-		try{
-			contact contactObj = contactMap.get(contactId);
-			System.out.println("CONTACT ID : \t CONTACT PERSON NAME : \t CONTACT NUMBER ");
-			System.out.println("\t"+contactId+"\t-  "+contactObj.getName()+"\t -  "+contactObj.getPhNumber());
-		}
-		catch(Exception e){
-			System.out.println("Contact not found .....");
-		}
 	}
 
 
