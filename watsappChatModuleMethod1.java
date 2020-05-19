@@ -174,7 +174,7 @@ class chatModule{
 							System.out.println("the given method is not found for the given resource....");	
 					}
 				}
-				catch(Exception e){
+				catch(Exception e ){
 					System.out.println("The given path parameter is not a number to identify a specific contact enter a contact Id ....");
 				}
 				break;	
