@@ -7,10 +7,10 @@ import java.util.Map;
 import java.util.Map.Entry;
 class contact{
 	private static int staticContactId;
+	private int contactId;
+	public static HashMap<Integer,contact> contactList = new HashMap<>();	
 	private String contactName;
 	private long contactNumber;
-	public static HashMap<Integer,contact> contactList = new HashMap<>();
-	private int contactId;
 
 	public contact(){
 		staticContactId++;
@@ -25,10 +25,6 @@ class contact{
 		this.contactNumber = contactNumber;
 	}
 
-	public static void setContact(int key,contact value){
-		contactList.put(key,value);
-	}
-
 	public int getContactId(){
 		return contactId;
 	}
@@ -39,6 +35,10 @@ class contact{
 
 	public long getContactNumber(){
 		return contactNumber;
+	}
+
+	public static void setContact(int key,contact value){
+		contactList.put(key,value);
 	}
 
 	public static HashMap getContactList(){
@@ -57,33 +57,30 @@ class contact{
 					gettingContactList();
 				}
 				else{
-					System.out.println("Given URL is wrong (Given Method not found) ..");
+					System.out.println("Given URL is wrong (Given Method not found) ..\n");
 				}
 				break;
 			case 3:
 				switch(splittedURL[0]){
 					case "get":
-						contactId = Integer.parseInt(splittedURL[2]);
-						gettingSpecificContact(contactId);
+						gettingSpecificContact(Integer.parseInt(splittedURL[2]));
 						break;
 					case "post":
 						creatingNewContact(splittedURL[2]);
 						break;
 					case "delete":
-						contactId = Integer.parseInt(splittedURL[2]);
-						deletingContact(contactId);
+						deletingContact(Integer.parseInt(splittedURL[2]));
 						break;
 					default:
-						System.out.println("Given URL is wrong (Given Method not found) ..");	
+						System.out.println("Given URL is wrong (Given Method not found) ..\n");	
 				}
-				break;		
+				break;
 			case 4:
-				contactId = Integer.parseInt(splittedURL[2]);
 				if(splittedURL[0].equals("put")){
-					updatingContact(contactId,splittedURL[3]);
+					updatingContact( Integer.parseInt(splittedURL[2]),splittedURL[3]);
 				}
 				else{
-					System.out.println("Given URL is wrong (Given Method not found) ..");
+					System.out.println("Given URL is wrong (Given Method not found) ..\n");
 				}
 				break;
 			default:
@@ -93,10 +90,10 @@ class contact{
 
 	public static void gettingContactList(){
 		Iterator<Entry<Integer,contact>> it = contact.getContactList().entrySet().iterator();
-		System.out.println("Contact Id\t|   contact Name\t|    contact Number\t");
+		System.out.println("Contact Id\t|   contact Name\t|    contact Number\t\n");
 		while(it.hasNext()){
 			Map.Entry<Integer,contact> contact =it.next();
-			System.out.println(contact.getKey()+"\t\t"+contact.getValue().getContactName()+"\t  "+contact.getValue().getContactNumber());
+			System.out.println("\t"+contact.getKey()+"\t\t"+contact.getValue().getContactName()+"\t  "+contact.getValue().getContactNumber()+"\n");
 		}	
 	}
 
@@ -104,7 +101,7 @@ class contact{
 		contact contactObj = (contact)contact.getContactList().get(contactId);
 		if(contactObj!=null){
 			System.out.println("Contact Id\t|   contact Name\t|    contact Number\t");
-			System.out.println(contactId+"\t\t"+contactObj.getContactName()+"\t  "+contactObj.getContactNumber());
+			System.out.println("\n"+contactId+"\t\t"+contactObj.getContactName()+"\t\t"+contactObj.getContactNumber()+"\n");
 		}
 		else{
 			System.out.println("Contact Id not found ....");
@@ -121,10 +118,10 @@ class contact{
 			contactObj.setContactName(name);
 			contactObj.setContactNumber(number);
 			contact.setContact(contactObj.getContactId(),contactObj);
-			System.out.println("Contact created successfully ...");
+			System.out.println("Contact created successfully ...\n");
 		}
 		else{
-			System.out.println("Contact Number Already exists ...");
+			System.out.println("Contact Number Already exists ...\n");
 		}	
 	}	
 
@@ -142,10 +139,10 @@ class contact{
 	public static void deletingContact(int contactId){
 		try{
 			contact.getContactList().remove(contactId);
-			System.out.print("Contact Deleted !");
+			System.out.print("Contact Deleted !\n");
 		}
 		catch(Exception ex){
-			System.out.print("Contact Id not found ....");
+			System.out.print("Contact Id not found ....\n");
 		}
 	}
 
@@ -158,18 +155,18 @@ class contact{
 				long phNum = Long.parseLong(contactDetails[1]);
 				if(!checkingContactExist(phNum)){
 					conObj.setContactNumber(phNum);
-					System.out.println("Contact Updated successfully ..");
+					System.out.println("Contact Updated successfully ...\n");
 				}
 				else{
-					System.out.println("Contact Number already Existx");
+					System.out.println("Contact Number already Exist ... \n");
 				}
 			}
 			catch(Exception ex){
-				System.out.println("Given parameters are wrong ..");
+				System.out.println("Given parameters are wrong ... \n");
 			}	
 		}
 		else{
-			System.out.print("Contact Id not found ....");
+			System.out.print("Contact Id not found ....\n");
 		} 
 	}
 }
@@ -244,7 +241,7 @@ class chat{
 					gettingChatList();
 				}
 				else{
-					System.out.println("Given URL is wrong (Given Method not found) ..");
+					System.out.println("Given URL is wrong (Given Method not found) ..\n");
 				}
 				break;
 			case 3:
@@ -257,7 +254,7 @@ class chat{
 						deletingChat(chatId);
 						break;
 					default:
-						System.out.println("Given URL is wrong (Given Method not found) ..");	
+						System.out.println("Given URL is wrong (Given Method not found) ..\n");	
 				}
 				break;		
 			case 4:
@@ -272,12 +269,13 @@ class chat{
 						break;
 					case "put":
 						archiveChat(chatId,splittedURL[3]);	
+						break;
 					default:
-						System.out.println("Given URL is wrong (Given Method not found) ..");	
+						System.out.println("Given URL is wrong (Given Method not found) ..\n");	
 				}
 				break;
 			default:
-				System.out.println("The given URL is wrong");
+				System.out.println("The given URL is wrong\n");
 		}
 	}
 
@@ -285,16 +283,21 @@ class chat{
 		if(chat.getChatList().containsKey(chatId)){
 			chat chatObj = (chat)chat.getChatList().get(chatId);
 			creatingMessageObj(chatObj,message);
-			System.out.println("Message Added successfully ...");
+			System.out.println("Message Added successfully ...\n");
 		} 
 		else{
-			if(!contactIdExists(chatId) && contact.getContactList().containsKey(chatId)){
-				creatingChatObj(chatId,message);
-				System.out.println("message posted successfully ...");
+			if(contactIdExists(chatId)){
+				System.out.println("Chat Id not found mapped Given Id mapped with anpther contact\n");
 			}
 			else{
-				System.out.println("Contact Not found for the given Id .....");
-			}
+				if(contact.getContactList().containsKey(chatId)){
+					creatingChatObj(chatId,message);
+					System.out.println("message posted successfully ...\n");
+				}
+				else{
+					System.out.println("Contact Not found for the given Id ...\n");
+				}
+			}	
 		}
 	}
 
@@ -303,27 +306,28 @@ class chat{
 		messageObj.setChatId(chatObj.getChatId());
 		messageObj.setContactId(chatObj.getContactId());
 		messageObj.setMessage(message);
-		messageObj.setMessageStatus("outGoingMessage");
+		messageObj.setMessageStatus("outgoing");
 		chatObj.setMessageId();
 		chatObj.setMessageObj(chatObj.getMessageId(),messageObj);
 
 	}
 
 	public static void creatingChatObj(int contactId,String message){
-			contact contactObj =(contact) contact.getContactList().get(contactId);
-			chat chatObj = new chat();
-			chatObj.setChatStatus("active");
-			chatObj.setContactId(contactObj.getContactId());
-			chat.creatingMessageObj(chatObj,message);
-			chat.setChat(chatObj.getChatId(),chatObj);
-			System.out.println("New Chat Created  chat Id = "+chatObj.getChatId());
+		contact contactObj =(contact) contact.getContactList().get(contactId);
+		chat chatObj = new chat();
+		chatObj.setChatStatus("active");
+		System.out.println("contact Id :"+contactObj.getContactId());
+		chatObj.setContactId(contactId);
+		chat.creatingMessageObj(chatObj,message);
+		chat.setChat(chatObj.getChatId(),chatObj);
+		System.out.println("New Chat Created  chat Id = "+chatObj.getChatId());
 	}
 
 	public static boolean contactIdExists(int id){
-		Iterator<Entry<Integer,contact>> it = chat.getChatList().entrySet().iterator();
+		Iterator<Entry<Integer,chat>> itr = chat.getChatList().entrySet().iterator();
 		int contactId = 0;
-		while(it.hasNext()){
-			Map.Entry<Integer,contact> chatObj =it.next();
+		while(itr.hasNext()){
+			Map.Entry<Integer,chat> chatObj =itr.next();
 			contactId = chatObj.getValue().getContactId();
 			if(contactId == id){
 				return true;
@@ -333,16 +337,23 @@ class chat{
 	}
 
 	public static void gettingChatList(){
-		Iterator<Entry<Integer,chat>> chatList = chat.getChatList().entrySet().iterator();
+		Iterator<Entry<Integer,chat>> chatItr = chat.getChatList().entrySet().iterator();
+		System.out.println("\tCHATS :\t");
+		printingChat(chatItr,"active");
+		System.out.println("\n\tARCHIVED CHATS :\t");
+		printingChat(chatItr,"unActive");
+	}
+
+	public static void printingChat(Iterator<Entry<Integer,chat>> chatItr,String chatStatus){
 		int contactId = 0;
-		while(chatList.hasNext()){
-			Map.Entry<Integer,chat> chat =chatList.next();
-			chat chatObj = chat.getValue();
+		while(chatItr.hasNext()){
+			Map.Entry<Integer,chat> chatList = chatItr.next();
+			chat chatObj = chatList.getValue();
 			contactId = chatObj.getContactId();
-			if(chatObj.getChatStatus().equals("active")){
+			if(chatObj.getChatStatus().equals(chatStatus)){
 				contact contactObj = (contact)contact.getContactList().get(contactId);
 				System.out.println("Chat Name : "+contactObj.getContactName());
-				System.out.println("last Message :"+chatObj.getLastMessageObj(chatObj.getMessageId()).getMessage());
+				System.out.println("last Message :"+chatObj.getLastMessageObj(chatObj.getMessageId()).getMessage()+"\n");
 			}
 		}
 	}
@@ -355,9 +366,8 @@ class chat{
 			System.out.println("Chat Name :"+contactObj.getContactName());
 			Iterator<Entry<Integer,message>> messageList = chatObj.getMessageList().entrySet().iterator();
 			while(messageList.hasNext()){
-				System.out.println("hello");
 				Map.Entry<Integer,message> messageObj = messageList.next(); 
-				System.out.println(messageObj.getValue().getMessage());
+				System.out.println(messageObj.getValue().getMessage()+"/n");
 			}
 		}
 	}
@@ -365,10 +375,10 @@ class chat{
 	public static void deletingChat(int chatId){
 		try{
 			chat.getChatList().remove(chatId);
-			System.out.print("Chat deleted ...");
+			System.out.print("Chat deleted ...\n");
 		}	
 		catch(Exception ex){
-			System.out.println("Chat Id not found ....");
+			System.out.println("Chat Id not found ...\n");
 		}
 	}
 
@@ -377,11 +387,11 @@ class chat{
 			chat chatObj = (chat)chat.getChatList().get(chatId);
 			try{
 				chatObj.getMessageList().remove(msgId);
-				System.out.println("Message Deleted ...");
+				System.out.println("Message Deleted ...\n");
 
 			}
 			catch(Exception ex){
-				System.out.println("Message Id not found ...");
+				System.out.println("Message Id not found ...\n");
 			}	
 		}
 	}
@@ -390,6 +400,7 @@ class chat{
 		if(chatList.containsKey(chatId)){
 			if(chatStatus.equals("archive")){
 				chatList.get(chatId).setChatStatus("unActive");
+				System.out.println("Chat Archive successfully ...\n");
 			}
 			else{
 				chatList.get(chatId).setChatStatus("active");	
@@ -547,7 +558,7 @@ class status{
 			Iterator<Map.Entry<Integer, String>> itr = list.entrySet().iterator();          
   		    while(itr.hasNext()){ 
            	Map.Entry<Integer, String> entry = itr.next(); 
-           	System.out.print(entry.getKey()+"\t"+entry.getValue());
+           	System.out.println(entry.getKey()+"\t"+entry.getValue()+"\n");
      		} 
 		}
 	}
@@ -604,6 +615,7 @@ class status{
 				switch(splittedURL[0]){
 					case "post":
 						myStatus.postMyStatus(splittedURL[2]);
+						break;
 					case "get":
 						try{
 							int contactId = Integer.parseInt(splittedURL[2]);
@@ -639,14 +651,9 @@ class status{
 				break;
 			case 5:
 				if(splittedURL[0].equals("post") && splittedURL[3].equals("forward")){
-					try{
-						int statusId = Integer.parseInt(splittedURL[2]);
-						int contactId = Integer.parseInt(splittedURL[4]);
-						myStatus.forwardStatus(statusId,contactId);
-					}
-					catch(Exception ex){
-						System.out.println("Sorry given parameters are wrong ....");
-					}
+					int statusId = Integer.parseInt(splittedURL[2]);
+					int contactId = Integer.parseInt(splittedURL[4]);
+					myStatus.forwardStatus(statusId,contactId);
 				}	
 				else{
 					System.out.println("Given URL is wrong (Method for the path not found ...)");
@@ -654,14 +661,9 @@ class status{
 				break;
 			case 6:
 				if(splittedURL[0].equals("post") && splittedURL[4].equals("reply")){
-					try{
-						int contactId = Integer.parseInt(splittedURL[2]);
-						int statusId = Integer.parseInt(splittedURL[3]);
-						statusReply(contactId,statusId,splittedURL[5]);
-					}
-					catch(Exception ex){
-						System.out.println("Sorry given parameters are wrong ....");
-					}
+					int contactId = Integer.parseInt(splittedURL[2]);
+					int statusId = Integer.parseInt(splittedURL[3]);
+					statusReply(contactId,statusId,splittedURL[5]);
 				}
 				else{
 					System.out.println("Given URL is wrong (Method for the path not found ...)");
@@ -672,9 +674,8 @@ class status{
 
 class watsapp{	
 	static Scanner inputScanner = new Scanner(System.in);
-	public static boolean processURL(String URL){
+	public static void processURL(String URL){
 		String[] splittedURL = URL.split(" /");
-		System.out.println(splittedURL.length);
 		if(splittedURL.length>=2){
 			switch(splittedURL[1]){
 				case "contacts":
@@ -687,28 +688,26 @@ class watsapp{
 					status.processingStatusModule(splittedURL);
 					break;	
 				default:
-					System.out.println("Given URL is Wrong (entity not found) ......");
+					System.out.println("Given URL is Wrong (entity not found) ......\n");
 			}
 		}
 		else{
-			System.out.println("Given URL is not valid ...");	
-		}
-		System.out.println("Do want to continue ....(yes/no)");
-		String continueSearching = inputScanner.nextLine();
-		if(continueSearching.equalsIgnoreCase("yes")){
-			return true;
-		}
-		else{
-			return false;
+			System.out.println("Given URL is not valid ...\n");	
 		}
 	}	
 
 	public static void main(String[] args) {
 		boolean getURL = true;
 		do{
+			System.out.println("\nType 'end' to Exit ...\n");
 			System.out.println("Enter the URL :");
 			String URL = inputScanner.nextLine();
-			getURL = processURL(URL);
+			if(URL.equals("end")){
+				getURL = false;	
+			}
+			else{
+				processURL(URL);
+			}
 		}
 		while(getURL);
 	}
